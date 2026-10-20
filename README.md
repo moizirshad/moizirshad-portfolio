@@ -37,7 +37,7 @@ Included case studies:
 - **Danat FZ LLC:** company name updated per request; the experience timeline covers mobile leadership and client delivery.
 - **LinkedIn project gallery:** FITT Meals, DubiCars, Bykea, Argaam, SRMG IR, Akhbaar24, Al-Aseel, Saudi Re, Advanced Petrochemical, Al Jouf Cement, Taiba for Investment, Tasnee, The Quotes, The Send App and ISWallet.
 
-Project cards load available app imagery and fall back to a project-branded illustration if a remote image is unavailable. The portfolio links the LinkedIn profile at `https://www.linkedin.com/in/moizirshad/`. No private source repository is linked as open source. React Native is marked as unverified for a production case study; no backend ownership is claimed beyond evidenced mobile API integration and collaboration.
+Project cards load available app imagery and fall back to a project-branded illustration if a remote image is unavailable. The portfolio links the LinkedIn profile at `https://www.linkedin.com/in/moizirshad/`. The portfolio focuses on verified work and skills; no backend ownership is claimed beyond evidenced mobile API integration and collaboration.
 
 ## Information to confirm or add
 

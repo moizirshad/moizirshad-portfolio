@@ -161,7 +161,6 @@ class _PortfolioHomeState extends State<PortfolioHome> {
           SliverToBoxAdapter(child: _aiPractice(context, wide)),
           SliverToBoxAdapter(child: _profileDetails(context, wide)),
           SliverToBoxAdapter(child: _expertise(context, wide)),
-          SliverToBoxAdapter(child: _publicCode(context, wide)),
           SliverToBoxAdapter(key: aboutKey, child: _about(context, wide)),
           SliverToBoxAdapter(child: _contact(context, wide)),
           SliverToBoxAdapter(child: _footer(context)),
@@ -510,7 +509,7 @@ class _PortfolioHomeState extends State<PortfolioHome> {
             padding: EdgeInsets.symmetric(horizontal: wide ? 64 : 22),
             child: Wrap(spacing: 12, runSpacing: 12, children: const [
               _Principle('EDUCATION', 'University of Karachi',
-                  '2015–2016 · Major subjects include software engineering, artificial intelligence, computer graphics and structured programming.'),
+                  'Master’s in Computer Science · 2015–2016 · Major subjects include software engineering, artificial intelligence, computer graphics and structured programming.'),
               _Principle(
                   'CERTIFICATE',
                   'Claude Code 101: From Prompt to Product',
@@ -551,7 +550,7 @@ class _PortfolioHomeState extends State<PortfolioHome> {
                 'Riverpod',
                 'BLoC',
                 'Provider',
-                'React Native*',
+                'React Native',
                 'Native SDK integration'
               ]),
               _SkillCard('Architecture', [
@@ -583,15 +582,6 @@ class _PortfolioHomeState extends State<PortfolioHome> {
                 'AI-assisted workflows'
               ]),
             ])),
-        Padding(
-            padding: const EdgeInsets.fromLTRB(22, 18, 22, 0),
-            child: Text(
-                '* React Native is listed in the CV, but no verified production case study is available yet. Backend experience shown here is API integration, not unverified backend implementation.',
-                style: Theme.of(c).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(c)
-                        .colorScheme
-                        .onSurface
-                        .withValues(alpha: .62))))
       ]);
 
   Widget _about(BuildContext c, bool wide) =>
@@ -609,28 +599,6 @@ class _PortfolioHomeState extends State<PortfolioHome> {
                   'Choose patterns to solve a real constraint, not to decorate a diagram.'),
               _Principle('04', 'Thoughtful AI',
                   'Use coding agents to accelerate implementation and debugging; keep review and accountability human.')
-            ]))
-      ]);
-
-  Widget _publicCode(BuildContext c, bool wide) =>
-      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        _section(c, 'PUBLIC CODE', 'A few public repositories.',
-            'The featured product work is largely private. These public repositories can be explored as code samples; they are not presented as client or employer deliverables.'),
-        Padding(
-            padding: EdgeInsets.symmetric(horizontal: wide ? 64 : 22),
-            child: Wrap(spacing: 12, runSpacing: 12, children: [
-              _RepositoryLink(
-                  'how_to_set_app_architecture',
-                  'Flutter architecture sample',
-                  'https://github.com/moizirshad/how_to_set_app_architecture',
-                  _launch),
-              _RepositoryLink(
-                  'flutter_facebook_login_page',
-                  'Flutter UI sample',
-                  'https://github.com/moizirshad/flutter_facebook_login_page',
-                  _launch),
-              _RepositoryLink('Argaam_Flutter', 'Public Flutter repository',
-                  'https://github.com/moizirshad/Argaam_Flutter', _launch)
             ]))
       ]);
 
@@ -1271,11 +1239,12 @@ class _SkillCard extends StatelessWidget {
 }
 
 class _Principle extends StatelessWidget {
-  const _Principle(this.n, this.title, this.body);
+  const _Principle(this.n, this.title, this.body, {this.height = 230});
   final String n, title, body;
   @override
   Widget build(BuildContext c) => SizedBox(
       width: 290,
+      height: 230,
       child: Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
