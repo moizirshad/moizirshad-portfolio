@@ -1,4 +1,4 @@
-import 'dart:html' as html;
+import 'cv_download.dart' as cv_download;
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -696,13 +696,11 @@ class _PortfolioHomeState extends State<PortfolioHome> {
             style: TextStyle(fontSize: 11))
       ]));
   void _email() => _launch('mailto:moiz.14jan@gmail.com');
-  void _cv() {
+  Future<void> _cv() async {
     final url = Uri.base
         .resolve('cv/Moiz_Irshad_CV_Mobile_Engineering_Lead.pdf')
         .toString();
-    html.AnchorElement(href: url)
-      ..download = 'Moiz_Irshad_CV.pdf'
-      ..click();
+    await cv_download.downloadCv(url, 'Moiz_Irshad_CV.pdf');
   }
 
   Future<void> _launch(String value) async {
