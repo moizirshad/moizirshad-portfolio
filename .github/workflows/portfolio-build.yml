@@ -1,0 +1,42 @@
+name: Build portfolio web release
+on:
+  push:
+    branches: [main]
+    paths:
+      - moizirshad-portfolio-source.zip
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - name: Extract source
+        run: unzip -q moizirshad-portfolio-source.zip -d portfolio-source
+      - name: Resolve dependencies
+        working-directory: portfolio-source
+        run: flutter pub get
+      - name: Analyze
+        working-directory: portfolio-source
+        run: flutter analyze --no-fatal-infos
+      - name: Test
+        working-directory: portfolio-source
+        run: flutter test
+      - name: Build web release
+        working-directory: portfolio-source
+        run: flutter build web --release --base-href /moizirshad/
+      - name: Package web output
+        run: |
+          mkdir -p web-release
+          cp -R portfolio-source/build/web/. web-release/
+          cd web-release
+          zip -qr ../portfolio-web.zip .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-web
+          path: portfolio-web.zip
+          retention-days: 7
