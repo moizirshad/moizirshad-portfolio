@@ -1,3 +1,5 @@
+import 'dart:html' as html;
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'data/projects.dart';
@@ -156,6 +158,7 @@ class _PortfolioHomeState extends State<PortfolioHome> {
           SliverToBoxAdapter(child: _architecture(context, wide)),
           SliverToBoxAdapter(
               key: experienceKey, child: _experience(context, wide)),
+          SliverToBoxAdapter(child: _aiPractice(context, wide)),
           SliverToBoxAdapter(child: _profileDetails(context, wide)),
           SliverToBoxAdapter(child: _expertise(context, wide)),
           SliverToBoxAdapter(child: _publicCode(context, wide)),
@@ -350,29 +353,7 @@ class _PortfolioHomeState extends State<PortfolioHome> {
               border: Border.all(color: Theme.of(c).dividerColor)),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Expanded(
-                child: Container(
-                    width: double.infinity,
-                    color: p.color.withValues(alpha: .12),
-                    child: Stack(children: [
-                      Positioned(top: 18, left: 20, child: _Badge(p.type)),
-                      Positioned(
-                          right: 22,
-                          bottom: 16,
-                          child: _ProductArt(project: p)),
-                      Positioned(
-                          left: 20,
-                          bottom: 23,
-                          right: 148,
-                          child: Text(p.platforms.join('  /  ').toUpperCase(),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: p.color,
-                                  fontWeight: FontWeight.w800,
-                                  fontSize: 11,
-                                  letterSpacing: 1.3)))
-                    ]))),
+            Expanded(child: _ProjectCardArtwork(project: p)),
             Padding(
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -503,6 +484,22 @@ class _PortfolioHomeState extends State<PortfolioHome> {
                   'SysTellex Inc.',
                   'Started a career in mobile application engineering.'),
             ]))
+      ]);
+
+  Widget _aiPractice(BuildContext c, bool wide) =>
+      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        _section(c, 'AI-DRIVEN DEVELOPMENT', 'Engineering with AI in the loop.',
+            'I use coding agents to move faster through implementation while keeping architecture, quality and accountability in engineering hands.'),
+        Padding(
+            padding: EdgeInsets.symmetric(horizontal: wide ? 64 : 22),
+            child: Wrap(spacing: 12, runSpacing: 12, children: const [
+              _Principle('01', 'Claude Code',
+                  'Agent-assisted codebase exploration, implementation, refactoring and debugging.'),
+              _Principle('02', 'OpenAI Codex · Cursor',
+                  'AI-driven development tools integrated into a practical mobile engineering workflow.'),
+              _Principle('03', 'Human engineering ownership',
+                  'Review generated changes, verify behavior and own the final technical decisions.'),
+            ])),
       ]);
 
   Widget _profileDetails(BuildContext c, bool wide) =>
@@ -699,9 +696,15 @@ class _PortfolioHomeState extends State<PortfolioHome> {
             style: TextStyle(fontSize: 11))
       ]));
   void _email() => _launch('mailto:moiz.14jan@gmail.com');
-  void _cv() => _launch(Uri.base
-      .resolve('assets/cv/Moiz_Irshad_CV_Mobile_Engineering_Lead.pdf')
-      .toString());
+  void _cv() {
+    final url = Uri.base
+        .resolve('cv/Moiz_Irshad_CV_Mobile_Engineering_Lead.pdf')
+        .toString();
+    html.AnchorElement(href: url)
+      ..download = 'Moiz_Irshad_CV.pdf'
+      ..click();
+  }
+
   Future<void> _launch(String value) async {
     final uri = Uri.parse(value);
     if (!await launchUrl(uri, webOnlyWindowName: '_blank')) {
@@ -884,59 +887,71 @@ class _Badge extends StatelessWidget {
               ?.copyWith(fontWeight: FontWeight.w700)));
 }
 
-class _ProductArt extends StatelessWidget {
-  const _ProductArt({required this.project});
+class _ProjectCardArtwork extends StatelessWidget {
+  const _ProjectCardArtwork({required this.project});
   final Project project;
+
   @override
-  Widget build(BuildContext c) => Container(
-      width: 112,
-      height: 150,
-      clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-          color: Theme.of(c).scaffoldBackgroundColor,
-          borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: project.color.withValues(alpha: .7), width: 2),
-          boxShadow: const [
-            BoxShadow(
-                color: Colors.black26, blurRadius: 20, offset: Offset(0, 10))
-          ]),
-      child: project.imageUrl == null
-          ? _fallback(c)
-          : Image.network(project.imageUrl!,
-              fit: BoxFit.cover,
-              alignment: Alignment.topCenter,
-              semanticLabel: '${project.name} project image',
-              loadingBuilder: (context, child, progress) => progress == null
-                  ? child
-                  : Container(
-                      color: project.color.withValues(alpha: .15),
-                      child: Center(
-                          child: SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator(
-                                  strokeWidth: 2, color: project.color)))),
-              errorBuilder: (context, error, stack) => _fallback(c)));
-  Widget _fallback(BuildContext c) => Container(
-      color: project.color.withValues(alpha: .12),
-      padding: const EdgeInsets.all(10),
-      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Icon(Icons.phone_iphone, color: project.color, size: 31),
-        const SizedBox(height: 8),
-        Text(project.name,
-            style: Theme.of(c)
-                .textTheme
-                .labelSmall
-                ?.copyWith(fontWeight: FontWeight.w800),
-            textAlign: TextAlign.center,
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis),
-        const SizedBox(height: 10),
-        Icon(
-            project.type == 'Native iOS' ? Icons.apple : Icons.widgets_outlined,
-            color: project.color,
-            size: 20)
-      ]));
+  Widget build(BuildContext context) => Stack(fit: StackFit.expand, children: [
+        _image(context),
+        DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.black.withValues(alpha: .12),
+                Colors.transparent,
+                Colors.black.withValues(alpha: .74),
+              ],
+              stops: const [0, .42, 1],
+            ),
+          ),
+        ),
+        Positioned(top: 18, left: 20, child: _Badge(project.type)),
+        Positioned(
+          left: 20,
+          right: 20,
+          bottom: 22,
+          child: Text(project.platforms.join('  /  ').toUpperCase(),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 11,
+                  letterSpacing: 1.3)),
+        ),
+      ]);
+
+  Widget _image(BuildContext context) {
+    if (project.imageAsset != null) {
+      return Image.asset(project.imageAsset!,
+          fit: BoxFit.cover,
+          alignment: Alignment.center,
+          semanticLabel: '${project.name} project image',
+          errorBuilder: (context, error, stack) => _fallback(context));
+    }
+    if (project.imageUrl != null) {
+      return Image.network(project.imageUrl!,
+          fit: BoxFit.cover,
+          alignment: Alignment.center,
+          semanticLabel: '${project.name} project image',
+          errorBuilder: (context, error, stack) => _fallback(context));
+    }
+    return _fallback(context);
+  }
+
+  Widget _fallback(BuildContext context) => Container(
+        color: project.color.withValues(alpha: .2),
+        alignment: Alignment.center,
+        child: Icon(
+            project.type == 'Native iOS'
+                ? Icons.phone_iphone
+                : Icons.widgets_outlined,
+            size: 76,
+            color: project.color.withValues(alpha: .75)),
+      );
 }
 
 class CaseStudyPage extends StatelessWidget {
@@ -1042,17 +1057,27 @@ class _ProjectShowcase extends StatelessWidget {
         child: SizedBox(
           width: double.infinity,
           height: 320,
-          child: project.imageUrl == null
-              ? _art(context)
-              : Image.network(
-                  project.imageUrl!,
+          child: project.imageAsset != null
+              ? Image.asset(
+                  project.imageAsset!,
                   fit: BoxFit.cover,
-                  alignment: Alignment.topCenter,
+                  alignment: Alignment.center,
                   semanticLabel: '${project.name} app image',
-                  loadingBuilder: (context, child, progress) =>
-                      progress == null ? child : _art(context, loading: true),
                   errorBuilder: (context, error, stack) => _art(context),
-                ),
+                )
+              : project.imageUrl == null
+                  ? _art(context)
+                  : Image.network(
+                      project.imageUrl!,
+                      fit: BoxFit.cover,
+                      alignment: Alignment.topCenter,
+                      semanticLabel: '${project.name} app image',
+                      loadingBuilder: (context, child, progress) =>
+                          progress == null
+                              ? child
+                              : _art(context, loading: true),
+                      errorBuilder: (context, error, stack) => _art(context),
+                    ),
         ),
       );
 

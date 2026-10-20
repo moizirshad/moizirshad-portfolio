@@ -23,7 +23,8 @@ class Project {
       this.collaboration =
           'Project-specific collaboration details are not available in the current verified record.',
       this.storeUrl,
-      this.imageUrl});
+      this.imageUrl,
+      this.imageAsset});
   final String id,
       name,
       type,
@@ -38,7 +39,7 @@ class Project {
       collaboration;
   final List<String> platforms, stack, highlights;
   final Color color;
-  final String? storeUrl, imageUrl;
+  final String? storeUrl, imageUrl, imageAsset;
 }
 
 // Project names, summaries, platforms and public store links are reconciled to Moiz's LinkedIn Projects section.
@@ -73,6 +74,7 @@ const projects = <Project>[
       outcome:
           'Built from scratch as the sole Flutter developer. The company reports serving 2,500+ customers and preparing more than 40,000 meals per week; these are business scale figures, not app usage metrics.',
       color: Color(0xFFC7F36B),
+      imageAsset: 'assets/projects/fitt-meals.png',
       storeUrl: 'https://apps.apple.com/ae/app/fitt-meals/id6446091379',
       imageUrl:
           'https://fittmeals.ae/wp-content/uploads/2023/07/1a-1024x1024.png',
@@ -101,6 +103,7 @@ const projects = <Project>[
       outcome:
           'CV-reported individual outcomes: 40% faster cross-platform feature delivery, 50% faster iOS startup, 35% lower memory use, and release time reduced from 4 hours to 30 minutes. The Dubi Hero of the Month award was received in February 2025. Product-wide figures—500K+ downloads, a 4.5+ rating and 99%+ crash-free sessions—are not attributed to one contributor.',
       color: Color(0xFFB7C6FF),
+      imageAsset: 'assets/projects/dubicars.png',
       storeUrl:
           'https://apps.apple.com/us/app/dubicars-used-new-cars-uae/id1087256071',
       imageUrl:
@@ -123,6 +126,7 @@ const projects = <Project>[
       outcome:
           'The CV describes a sole iOS engineering role on a platform with 2M+ daily active users. That is a platform-wide figure, not a result attributed to one engineer.',
       color: Color(0xFFFFC27A),
+      imageAsset: 'assets/projects/bykea.png',
       storeUrl:
           'https://apps.apple.com/us/app/bykea-cab-rides-delivery/id1351179184',
       imageUrl:
@@ -146,6 +150,7 @@ const projects = <Project>[
       outcome:
           'LinkedIn project description; no project-specific outcome figures are listed.',
       color: Color(0xFF85D6C5),
+      imageAsset: 'assets/projects/argaam.png',
       storeUrl: 'https://apps.apple.com/eg/app/argaam-legacy/id412588115',
       imageUrl:
           'https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/f8/79/16/f87916fa-60d1-d2e6-e8a0-964195793b0c/5d7910d2-6d61-433b-9b0e-b5afc81340da_Group_2.png/471x1024.jpeg'),
@@ -168,6 +173,7 @@ const projects = <Project>[
       outcome:
           'Features are described in LinkedIn; no project-specific outcome figures are listed.',
       color: Color(0xFFB7C6FF),
+      imageAsset: 'assets/projects/srmg.jpeg',
       storeUrl: 'https://apps.apple.com/eg/app/srmg-ir-app/id1354322787'),
   Project(
       id: 'akhbaar24',
@@ -186,6 +192,7 @@ const projects = <Project>[
       outcome:
           'LinkedIn project description; no project-specific outcome figures are listed.',
       color: Color(0xFFFF9A88),
+      imageAsset: 'assets/projects/akhbaar24.jpeg',
       storeUrl:
           'https://apps.apple.com/pk/app/%D8%A3%D8%AE%D8%A8%D8%A724/id595306572',
       imageUrl:
@@ -208,6 +215,7 @@ const projects = <Project>[
       outcome:
           'LinkedIn project description; no project-specific outcome figures are listed.',
       color: Color(0xFFC6A8F5),
+      imageAsset: 'assets/projects/al-aseel.jpeg',
       storeUrl:
           'https://apps.apple.com/pk/app/al-aseel-%D8%AB%D9%88%D8%A8-%D8%A7%D9%84%D8%A3%D8%B5%D9%8A%D9%84/id1362473926'),
   Project(
@@ -228,6 +236,7 @@ const projects = <Project>[
       outcome:
           'LinkedIn project description; no project-specific outcome figures are listed.',
       color: Color(0xFF85D6C5),
+      imageAsset: 'assets/projects/saudi-re.jpg',
       storeUrl:
           'https://apps.apple.com/eg/app/saudi-re-%D8%A5%D8%B9%D8%A7%D8%AF%D8%A9/id1446568968'),
   Project(
@@ -248,6 +257,7 @@ const projects = <Project>[
       outcome:
           'LinkedIn project description; no project-specific outcome figures are listed.',
       color: Color(0xFFFFC27A),
+      imageAsset: 'assets/projects/advanced-petrochemical.jpeg',
       imageUrl:
           'https://advancedpetrochem.eurolandir.com/media/kc3d23qn/appscreen.png'),
   Project(
@@ -268,7 +278,8 @@ const projects = <Project>[
       ],
       outcome:
           'LinkedIn project description; no project-specific outcome figures are listed.',
-      color: Color(0xFFB7C6FF)),
+      color: Color(0xFFB7C6FF),
+      imageAsset: 'assets/projects/al-jouf.jpeg'),
   Project(
       id: 'taiba',
       name: 'Taiba for Investment',
@@ -287,7 +298,8 @@ const projects = <Project>[
       ],
       outcome:
           'LinkedIn project description; no project-specific outcome figures are listed.',
-      color: Color(0xFFC7F36B)),
+      color: Color(0xFFC7F36B),
+      imageAsset: 'assets/projects/taiba.jpeg'),
   Project(
       id: 'tasnee',
       name: 'Tasnee · التصنيع',
@@ -306,7 +318,8 @@ const projects = <Project>[
       ],
       outcome:
           'LinkedIn project description; no project-specific outcome figures are listed.',
-      color: Color(0xFFFF9A88)),
+      color: Color(0xFFFF9A88),
+      imageAsset: 'assets/projects/tasnee.jpeg'),
   Project(
       id: 'the-quotes',
       name: 'The Quotes',
@@ -325,7 +338,8 @@ const projects = <Project>[
       ],
       outcome:
           'LinkedIn project description; no project-specific outcome figures are listed.',
-      color: Color(0xFFC6A8F5)),
+      color: Color(0xFFC6A8F5),
+      imageAsset: 'assets/projects/the-quotes.png'),
   Project(
       id: 'the-send-app',
       name: 'The Send App',

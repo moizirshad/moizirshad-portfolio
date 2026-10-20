@@ -1,6 +1,6 @@
 # Moiz Irshad — Mobile Engineering Lead
 
-A responsive Flutter Web portfolio for a mobile engineering lead with 12+ years across native iOS, Android, Flutter and product delivery. Based in Dubai, UAE. The site includes all 15 LinkedIn projects, project filtering, individual case-study routes, a dark/light theme toggle, verified experience, education and credential details, an architecture overview, skills, contact links and a CV download.
+A responsive Flutter Web portfolio for a mobile engineering lead with 12+ years across native iOS, Android, Flutter and product delivery. Based in Dubai, UAE. The site includes all 15 LinkedIn projects, project filtering, individual case-study routes, a dark/light theme toggle, verified experience, an AI-driven development section, education and credential details, an architecture overview, skills, contact links and a CV download.
 
 ## Run locally
 
@@ -27,7 +27,7 @@ For a custom domain, configure the domain in GitHub Pages, add its DNS records, 
 
 ## Content and verified scope
 
-Project content lives separately in `lib/data/projects.dart`; the experience and skills source is in `lib/main.dart`. The gallery contains all 15 entries in the LinkedIn Projects section. Add projects to the shared `Project` model and provide evidence, role, platforms, technologies, outcomes and links before including them. Case-study pages use the same fields and deliberately leave unknown details out.
+Project content lives separately in `lib/data/projects.dart`; the experience and skills source is in `lib/main.dart`. The gallery contains all 15 entries in the LinkedIn Projects section. Supplied app artwork is bundled locally in `assets/projects/` and shown across project cards and case studies. The CV download is served as a static file from `web/cv/` so GitHub Pages publishes it at a stable URL. Add projects to the shared `Project` model and provide evidence, role, platforms, technologies, outcomes and links before including them. Case-study pages use the same fields and deliberately leave unknown details out.
 
 Included case studies:
 
